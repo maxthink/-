@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2018-07-06 20:01:30
+Date: 2018-07-10 20:24:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -52,7 +52,7 @@ CREATE TABLE `admin_module` (
   `show` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否显示: 0:不显示; 1:显示;',
   PRIMARY KEY (`id`),
   KEY `action` (`action`,`option`)
-) ENGINE=MyISAM AUTO_INCREMENT=107 DEFAULT CHARSET=utf8 COMMENT='后台权限表';
+) ENGINE=MyISAM AUTO_INCREMENT=112 DEFAULT CHARSET=utf8 COMMENT='后台权限表';
 
 -- ----------------------------
 -- Records of admin_module
@@ -147,6 +147,10 @@ INSERT INTO `admin_module` VALUES ('103', '消息管理', '2', '102', '0', 'Wxms
 INSERT INTO `admin_module` VALUES ('104', '用户管理', '2', '102', '0', 'Wxuser', 'index', '1', '1');
 INSERT INTO `admin_module` VALUES ('105', '素材管理', '2', '102', '0', 'Wxmedia', 'index', '1', '1');
 INSERT INTO `admin_module` VALUES ('106', '二维码', '2', '102', '0', 'Wxqrcode', 'index', '1', '1');
+INSERT INTO `admin_module` VALUES ('107', '图片库', '0', '0', '0', '', '', '1', '1');
+INSERT INTO `admin_module` VALUES ('108', '图片列表', '1', '107', '0', 'Image', 'index', '1', '1');
+INSERT INTO `admin_module` VALUES ('109', '图片库', '1', '107', '0', 'Image', 'add', '1', '1');
+INSERT INTO `admin_module` VALUES ('111', '图片列表', '2', '108', '0', 'Image', 'index', '1', '1');
 
 -- ----------------------------
 -- Table structure for `admin_power`
@@ -226,11 +230,10 @@ DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL COMMENT '产品名称',
-  `title` varchar(64) NOT NULL COMMENT '产品标题',
+  `desc` varchar(255) NOT NULL COMMENT '产品标题',
   `cover` varchar(255) NOT NULL COMMENT '封面',
-  `img` varchar(255) DEFAULT NULL COMMENT '图片详情',
   `priceunit` varchar(32) NOT NULL COMMENT '计量单位：公斤，筐，箱 等等',
-  `price` float(4,2) NOT NULL,
+  `price` float(4,2) unsigned NOT NULL COMMENT '单价',
   `status` tinyint(1) unsigned DEFAULT '0' COMMENT '0: 没问题的。',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='产品菜品列表';
