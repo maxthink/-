@@ -37,9 +37,9 @@ var CLICK_EDIT_CONTENT = '点击修改内容';
 							<div class="handle-btns">
                                                             当前目录：<a >根目录</a>
 							</div>
-                                                        <div style='padding-left:50px; padding-top:50px;'>
+                                                        <div style='float:left;padding-left:20px; padding-top:20px;'>
 								<div class='clear'></div>
-								<ul id="tree"><li id="0"><span data-id="0" >根<span></li></ul>
+								<ul id="tree"><li id="0"><span data-id="0" >根目录<span></li></ul>
 							</div>
                                                     
                                                     
