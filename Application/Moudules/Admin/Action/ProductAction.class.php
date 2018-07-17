@@ -34,13 +34,11 @@ class ProductAction extends CommonAction {
         if ($this->_get('id')) {
 
             $res = $this->m->find(intval($this->_request('id')));
-            
+           
             if ($res) {
-                $m = D('Atype');
-                $category = $m->getlist();
-                //var_dump($category);
-                $this->assign('atype', $category);
-                $this->assign('vo', $res);
+                $res['time'] = date('Y-m-d H:i',$res['time']);
+                 print_r($res);
+                $this->assign('res', $res);
             } else {
                 $this->error('未找到数据.', U(MODULE_NAME . '/index'));
             }
@@ -53,7 +51,7 @@ class ProductAction extends CommonAction {
                 
                 if ($this->m->create()) { //创建数据对象
                     
-                    $this->m->timeline = strtotime($this->_post('timeline')); //字符串时间转换为时间戳
+                    $this->m->time = strtotime($this->_post('time')); //字符串时间转换为时间戳
 
                     if ($this->m->save()) { // 把用户对象写入数据库
                         $this->success('更新成功', U(MODULE_NAME . '/index'));
@@ -67,7 +65,7 @@ class ProductAction extends CommonAction {
                 //添加
             } else {
                 if ($this->m->create()) {
-                    $this->m->timeline = strtotime($this->_post('timeline')); //字符串时间转换为时间戳
+                     $this->m->time = strtotime($this->_post('time')); //字符串时间转换为时间戳
                     
                     if ($this->m->add()) {
                         $this->success('添加成功', U(MODULE_NAME . '/index'));
