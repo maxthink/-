@@ -54,56 +54,42 @@ var CLICK_EDIT_CONTENT = '点击修改内容';
 <div class="cw-body">
 	<div class="fb-title"><div><p><span>产品 &gt; 编辑 </span></p></div></div>
 	<div class="fb-body">
-		<form method='post' id="form" name="form"  action="{:U(MODULE_NAME.'/update')}" >
+		<form method='post' id="form" name="form"  action="{:U(MODULE_NAME.'/modify')}" >
 			<table cellpadding="4" cellspacing="0" cellspacing="1"  border="0" class="table-form">
 				<input type="hidden" name="id" value="{$res.id}">
 				<tr>
-					<th  width="200">名称</th> <td><textarea name="title" cols="80" rows="2" >{$res.title}</textarea></td>
+					<th  width="200">名称</th> <td><textarea name="name" cols="80" rows="2" >{$res.name}</textarea></td>
 				</tr>
 
-				<tr>
-					<th  width="200">类别</th>
-					<td>
-						<div align="left">
-
-							<select name="category"  style="width:150px">
-								<foreach name="category" item="vo">
-								<optgroup label="{$vo.name_en} {$vo.name}">
-									<foreach name="vo.sub" item="cat_sub">
-									<if condition="cat_sub.id eq $res.category">
-									<option value ="{$cat_sub.id}" selected >{$cat_sub.name}</option>
-									<else/>
-									<option value ="{$cat_sub.id}">{$cat_sub.name}</option>
-									</if>
-									</foreach>
-								</optgroup>
-								</foreach>
-							</select>
-						</div>
-					</td>
-				</tr>
-
+				
 				<tr>
 					<th>简介</th>
 					<td><textarea  name="intro" cols="80" rows="8" >{$res.intro}</textarea></td>
 				</tr>
 
 				<tr>
-					<th>正文</th>
-					<td><textarea  name="content"  >{$res.content}</textarea></td>
+					<th>计价单位</th>
+					<td><select name="priceunit"  style="width:150px">
+						<option <?php if($res['priceunit']=='公斤') echo 'selected'; ?> value ="公斤">公斤</option>                                                
+					</select></td>
 				</tr>
-
+                                
+                                <tr>
+					<th>单价</th>
+					<td><input type="number" name="price" min="0.1" max="100" step="0.1" value={$res.price}/> 元(RMB) </td>
+				</tr>
+                                
 				<tr>
 					<th  width="200">发布时间</th>
 					<td><input class="Wdate" type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})" name="time"  value="{$res.time}" /></td>
 				</tr>
 
 				<tr>
-					<th>上传图片:
-                    	<div style="text-align:left; width:80px; margin:10px 0 0 120px; ">
-                        	<input id="file_upload" name="imgs" type="file" />
-                        </div>
-                    </th>
+					<th>选择封面:
+                                            <div style="text-align:left; width:80px; margin:10px 0 0 120px; ">
+                                                
+                                            </div>
+                                        </th>
 					<td>
 						<div id="uploaded">
 							<div class="imgorder" id="img0">
@@ -126,6 +112,7 @@ var CLICK_EDIT_CONTENT = '点击修改内容';
 				<tr class="act">
 					<th>&nbsp;</th>
 					<td>
+                                                <input name="subflag" value="1" type="hidden" />
 						<input type="submit" class="submit_btn" value="确定" />&nbsp;&nbsp;&nbsp;&nbsp;
 						<a href="{:U(MODULE_NAME.'/index')}" class="submit_btn">取消</a>
 					</td>
